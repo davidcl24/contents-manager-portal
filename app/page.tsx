@@ -4,7 +4,7 @@ async function SideBar({links}: {links: string[]} ) {
   return (
     <div>
       {links.map((link)=> (
-        <Link href={`/${link}`}>{link}</Link>
+        <Link key={link} href={`/${link.toLocaleLowerCase()}`}>{link} <br/></Link>
       ))}
     </div>
   )
@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div>
       <main>
-        <SideBar links={["movies"]} />
+        <SideBar links={["Movies", "Webos"]} />
       </main>
       <footer>
        
