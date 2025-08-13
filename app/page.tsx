@@ -4,7 +4,7 @@ async function SideBar({links}: {links: string[]} ) {
   return (
     <div>
       {links.map((link)=> (
-        <Link key={link} href={`/${link.toLocaleLowerCase()}`}>{link} <br/></Link>
+        <Link key={link} href={`/${link.toLowerCase()}`}>{link} <br/></Link>
       ))}
     </div>
   )
