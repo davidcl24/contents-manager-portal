@@ -26,8 +26,8 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <SideBar links={["Movies", "Shows", "Actors", "Directors", "Genres"]} />
-
         <span onClick={openNav}>open</span>
+        
         {children}
       </body>
     </html>
