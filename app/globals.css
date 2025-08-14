@@ -42,3 +42,17 @@
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+.container {
+    display: inline-block;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.sidenav-btn {
+     width: 35px;
+     height: 5px;
+     background-color: #333;
+     margin: 6px 0;
+     transition: 0.4s;
+}
