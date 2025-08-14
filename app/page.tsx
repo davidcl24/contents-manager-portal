@@ -1,11 +1,23 @@
+"use client";
+
 import Link from "next/link";
 
-async function SideBar({links}: {links: string[]} ) {
+
+function openNav() {
+  document.getElementById("mySidenav")!.style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav")!.style.width = "0";
+}
+
+function SideBar({links}: {links: string[]} ) {
   return (
-    <div>
+    <div id="mySidenav" className="sidenav">
       {links.map((link)=> (
-        <Link key={link} href={`/${link.toLowerCase()}`}>{link} <br/></Link>
+        <Link key={link} href={`/${link.toLowerCase()}`} className="sidenav-link">{link} <br/></Link>
       ))}
+      <span onClick={closeNav} className="closebtn">X</span>
     </div>
   )
 }
@@ -16,6 +28,8 @@ export default function Home() {
     <div>
       <main>
         <SideBar links={["Movies", "Webos"]} />
+
+        <span onClick={openNav}>open</span>
       </main>
       <footer>
        
