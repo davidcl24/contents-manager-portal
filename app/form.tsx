@@ -18,7 +18,7 @@ export function ContentFormText({questions}: {questions: string[]}) {
     return (
         questions.map((question) => (
             <label className={styles.label} key={question}>
-                <input className={styles.input} placeholder={question} type="text" name={question.toLowerCase()} />
+                <input className={styles.input} placeholder={question} type="text" name={question.split(/\.?(?=[A-Z])/).join('_').toLowerCase()} />
             </label>
         ))
     );
@@ -28,7 +28,7 @@ export function ContentFormNumber({questions}: {questions: string[]}) {
     return (
         questions.map((question) => (
             <label className={styles.label} key={question}>
-                <input className={styles.input} placeholder={question} type='number' name={question.toLowerCase()} />
+                <input className={styles.input} placeholder={question} type='number' name={question.split(/\.?(?=[A-Z])/).join('_').toLowerCase()} />
             </label>
         ))
     );
@@ -38,7 +38,7 @@ export function ContentFormDate({questions}: {questions: string[]}) {
     return (
         questions.map((question) => (
             <label className={styles.label} key={question}>
-                <input className={styles.input} placeholder={question} type='date' name={question.toLowerCase()} />
+                <input className={styles.input} placeholder={question} type='date' name={question.split(/\.?(?=[A-Z])/).join('_').toLowerCase()} />
             </label>
         ))
     );
