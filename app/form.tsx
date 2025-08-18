@@ -14,6 +14,24 @@ export async function postFormMultipart(formData: FormData) {
 }
 
 
+export async function postFormJson(formData: FormData) {
+    'use server';
+    try {
+        const url = formData.get('url') as string;
+        const body = Object.fromEntries(formData.entries());
+
+        const res = await fetch (url, {
+            method: 'POST',
+            headers: { 
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        });
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 export function ContentFormText({questions}: {questions: string[]}) {
     return (
         questions.map((question) => (
