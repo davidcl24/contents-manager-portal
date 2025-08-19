@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache';
 import styles from './form.module.css'
 
 export async function postFormMultipart(formData: FormData) {
@@ -11,6 +12,7 @@ export async function postFormMultipart(formData: FormData) {
     } catch (err) {
         console.error(err);
     }
+    revalidatePath('/');
 }
 
 
@@ -30,6 +32,7 @@ export async function postFormJson(formData: FormData) {
     } catch (err) {
         console.error(err);
     }
+    revalidatePath('/');
 }
 
 export function ContentFormText({questions}: {questions: string[]}) {
