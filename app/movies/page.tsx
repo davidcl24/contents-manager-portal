@@ -1,9 +1,18 @@
 import ShowFetchedItems from "../fetch-data";
-import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText} from "../form";
+import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm} from "../form";
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 
-export default function MoviePage() {
+export default async function MoviePage({searchParams}: {searchParams: {id? :string}}) {
+    const {id} = await searchParams;
+    let movieData: any = null
+
+    if (id) {
+        const res = await fetch(`http://localhost:30000/movies/${id}`)
+        if (res.ok) {
+            movieData = await res.json();
+        }
+    }
     return (
         <section>
             <div className="flex  justify-center">
@@ -13,20 +22,22 @@ export default function MoviePage() {
             <div className={stylesList.container}>
                 <ShowFetchedItems apiUrl="http://localhost:30000/movies" localUrl={"/movies/"} />
 
-                <form className={styles.formWrapper} action={postFormMultipart}>
-                    <input type="hidden" name="url" value="http://localhost:30000/movies" />
-                    <ContentFormText questions={["Title", "Synopsis"]}/>
-                    <ContentFormNumber questions={["Lenght"]} />
-                    <ContentFormDate questions={["ReleaseDate"]} />
-                    <ContentFormNumber questions={["GenreId"]} />
-                    <ContentFormText questions={["PosterUrl"]} />
-                    <ContentFormNumber questions={["Rating"]} />
+                <form className={styles.formWrapper} action={id ? patchFormMultipart : postFormMultipart}>
+                    <input type="hidden" name="url" value={id ? `http://localhost:30000/movies/${id}` : "http://localhost:30000/movies"} />
+                    <ContentFormText question={"Title"} value={movieData?.title ?? ""}/>
+                    <ContentFormText question="Synopsis" value={movieData?.synopsis ?? ""}/>
+                    <ContentFormNumber question={"Lenght"} value={movieData?.length ?? ""}/>
+                    <ContentFormDate question={"ReleaseDate"} value={movieData?.release_date ?? ""}/>
+                    <ContentFormNumber question={"GenreId"} value={movieData?.genre_id ?? ""}/>
+                    <ContentFormText question={"PosterUrl"} value={movieData?.poster_url ?? ""}/>
+                    <ContentFormNumber question={"Rating"} value={movieData?.rating ?? ""}/>
                     <label className={styles.label}>
                         Is published
                         <input type="checkbox" name="is_published"/>
                     </label>
                     <input className={styles.fileInput} type="file" name="videoFile"/>
-                    <input className={styles.button} type="submit"/>
+                    <input className={styles.button} type="submit" value={id ? 'Actualizar' : 'Enviar'}/>
+                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={deleteForm} />)} 
                 </form>
             </div>
         </section>
