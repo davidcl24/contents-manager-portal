@@ -3,10 +3,12 @@ import ShowFetchedItems from "../fetch-data";
 import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm} from "../form";
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
+import { ContentFormDropdown } from "../form-client";
 
 export default async function MoviePage({searchParams}: {searchParams: {id? :string}}) {
     const {id} = await searchParams;
-    let movieData: any = null
+    let movieData: any = null;
+    let genresData: any[] = [];
 
     if (id) {
         const res = await fetch(`http://localhost:30000/movies/${id}`)
@@ -14,6 +16,11 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
             movieData = await res.json();
         }
     }
+    const res = await fetch(`http://localhost:30000/genres`);
+    if (res.ok){
+        genresData = await res.json();
+    }
+
     return (
         <section>
             <div className="flex  justify-center">
@@ -29,7 +36,8 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
                     <ContentFormText question="Synopsis" value={movieData?.synopsis ?? ""}/>
                     <ContentFormNumber question={"Lenght"} value={movieData?.length ?? ""}/>
                     <ContentFormDate question={"ReleaseDate"} value={movieData?.release_date ?? ""}/>
-                    <ContentFormNumber question={"GenreId"} value={movieData?.genre_id ?? ""}/>
+                    {/* <ContentFormNumber question={"GenreId"} value={movieData?.genre_id ?? ""}/> */}
+                    <ContentFormDropdown question={"GenreId"} items={genresData} value={movieData?.genre_id ?? ""} />
                     <ContentFormText question={"PosterUrl"} value={movieData?.poster_url ?? ""}/>
                     <ContentFormNumber question={"Rating"} value={movieData?.rating ?? ""}/>
                     <label className={styles.label}>

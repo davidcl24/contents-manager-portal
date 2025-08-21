@@ -1,5 +1,5 @@
 import { revalidatePath } from 'next/cache';
-import styles from './form.module.css'
+import styles from './form.module.css';
 
 export async function deleteForm(formData: FormData) {
     'use server';
