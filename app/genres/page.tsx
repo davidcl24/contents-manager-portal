@@ -2,6 +2,7 @@ import {ContentFormText, deleteForm, patchFormJson, postFormJson} from "../form"
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 import ShowFetchedItems from "../fetch-data";
+import { redirect } from "next/navigation";
 
 
 export default async function GenrePage({searchParams}: {searchParams: {id? :string}}) {
@@ -27,7 +28,15 @@ export default async function GenrePage({searchParams}: {searchParams: {id? :str
                     <input type="hidden" name="url" value={id ? `http://localhost:30000/genres/${id}` : "http://localhost:30000/genres"} />
                     <ContentFormText question={"Name"} value={genreData?.name ?? ""}/>
                     <input className={styles.button} type="submit" value={id ? 'Actualizar' : 'Enviar'}/>
-                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={deleteForm} />)} 
+                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
+                        'use server';
+                        deleteForm(formData);
+                        redirect('/genres');
+                    }} />)} 
+                    {id && (<input className={styles.button} type="submit" value="Cancelar" formAction={async () => {
+                        'use server';
+                        redirect('/genres');
+                    }} />)}  
             </form>
             </div>
         </section>

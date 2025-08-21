@@ -2,6 +2,7 @@ import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, 
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 import ShowFetchedItems from "../fetch-data";
+import { redirect } from "next/navigation";
 
 
 export default async function ShowPage({searchParams}: {searchParams: {id? :string}}) {
@@ -37,7 +38,15 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                         <input type="checkbox" name="is_published"/>
                     </label>
                     <input className={styles.button} type="submit" value={id ? 'Actualizar' : 'Enviar'}/>
-                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={deleteForm} />)} 
+                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
+                        'use server';
+                        deleteForm(formData);
+                        redirect("/shows");
+                    }} />)} 
+                    {id && (<input className={styles.button} type="submit" value="Cancelar" formAction={async () => {
+                        'use server';
+                        redirect('/shows');
+                    }} />)}  
                 </form>
             </div>
         </section>

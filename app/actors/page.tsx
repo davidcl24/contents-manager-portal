@@ -2,6 +2,7 @@ import {ContentFormDate, ContentFormText, deleteForm, patchFormJson, postFormJso
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 import ShowFetchedItems from "../fetch-data";
+import { redirect } from "next/navigation";
 
 
 export default async function ActorPage({searchParams}: {searchParams: {id? :string}}) {
@@ -28,7 +29,15 @@ export default async function ActorPage({searchParams}: {searchParams: {id? :str
                     <ContentFormText question={"Name"} value={actorData?.name ?? ""}/>
                     <ContentFormDate question={"Birth"} value={actorData?.birth ?? ""}/>
                     <input className={styles.button} type="submit" value={id ? 'Actualizar' : 'Enviar'}/>
-                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={deleteForm} />)}     
+                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
+                        'use server';
+                        deleteForm(formData);
+                        redirect('/actors');
+                    }} />)}   
+                    {id && (<input className={styles.button} type="submit" value="Cancelar" formAction={async () => {
+                        'use server';
+                        redirect('/actors');
+                    }} />)}  
                  </form>
             </div>
         </section>
