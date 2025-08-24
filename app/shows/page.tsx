@@ -5,9 +5,10 @@ import ShowFetchedItems from "../fetch-data";
 import { redirect } from "next/navigation";
 import { ContentFormDropdown } from "../form-client";
 
-export default async function ShowPage({searchParams}: {searchParams: {id? :string}}) {
-    const {id} = await searchParams;
+export default async function ShowPage({searchParams}: {searchParams: {id? :string, episode_id?: string}}) {
+    const {id, episode_id} = await searchParams;
     let showData: any = null;
+    let episodeData: any = null;
     let episodesData: any = [];
     let genresData: any[] = [];
 
@@ -17,6 +18,12 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
             showData = await res.json();
             const resEps = await fetch(`http://localhost:30000/shows/${id}/episodes`);
             episodesData = await resEps.json();
+        }
+    }
+    if (episode_id) {
+        const res = await fetch(`http://localhost:30000/episodes/${episode_id}`);
+        if (res.ok) {
+            episodeData = await res.json();
         }
     }
     const res = await fetch(`http://localhost:30000/genres`);
@@ -39,7 +46,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                     <ContentFormText question={"Synopsis"} value={showData?.synopsis ?? ""}/>
                     <ContentFormNumber question={"SeasonsNum"} value={showData?.seasons_num ?? ""}/>
                     <ContentFormDropdown question="Episodes" items={episodesData} value={" "} />
-                    <ContentFormDate question={"Date"} value={showData?.date ?? ""}/>
+                    <ContentFormDate question={"ReleaseDate"} value={showData?.release_date ?? ""}/>
                     {/* <ContentFormNumber question={"GenreId"} value={showData?.genre_id ?? ""}/> */}
                     <ContentFormDropdown question={"GenreId"} items={genresData} value={showData?.genre_id ?? ""} />
                     <ContentFormText question={"PosterUrl"} value={showData?.poster_url ?? ""}/>
@@ -61,29 +68,29 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                 </form>
 
                 {id && 
-                (<form className={styles.formWrapper} action={id ? patchFormMultipart : postFormMultipart}>
-                    <input type="hidden" name="url" value={"http://localhost:30000/episodes"}/>
-                    <ContentFormText question="Title" value="" />
-                    <ContentFormText question="Synopsis" value="" />
-                    <ContentFormNumber question="SeasonNum" value="" />
-                    <ContentFormNumber question="EpisodeNum" value="" />
-                    <ContentFormNumber question="Length" value="" />
-                    <ContentFormDate question="ReleaseDate" value="" />
+                (<form className={styles.formWrapper} action={episode_id ? patchFormMultipart : postFormMultipart}>
+                    <input type="hidden" name="url" value={episodeData ? `http://localhost:30000/episodes/${episode_id}` : "http://localhost:30000/episodes"}/>
+                    <ContentFormText question="Title" value={episodeData?.title ?? ""} />
+                    <ContentFormText question="Synopsis" value={episodeData?.synopsis ?? ""} />
+                    <ContentFormNumber question="SeasonNum" value={episodeData?.season_num ?? ""} />
+                    <ContentFormNumber question="EpisodeNum" value={episodeData?.episode_num ?? ""} />
+                    <ContentFormNumber question="Length" value={episodeData?.length ?? ""} />
+                    <ContentFormDate question="ReleaseDate" value={episodeData?.release_date ?? ""} />
                     <label className={styles.label}>
                         <input value={id} type='hidden' name={"show_id"} />
                     </label>
                     <input className={styles.fileInput} type="file" name="videoFile"/>
 
                     <input className={styles.button} type="submit" value={'Enviar'}/>
-                    {/* {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
+                    {episode_id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
                         'use server';
                         deleteForm(formData);
                         redirect(`/shows/?id=${id}`);
                     }} />)} 
-                    {id && (<input className={styles.button} type="submit" value="Cancelar" formAction={async () => {
+                    {episode_id && (<input className={styles.button} type="submit" value="Cancelar" formAction={async () => {
                         'use server';
                         redirect(`/shows/?id=${id}`);
-                    }} />)}   */}
+                    }} />)}  
                 </form>)}
             </div>
         </section>
