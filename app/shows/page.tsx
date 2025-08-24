@@ -74,8 +74,8 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                     </label>
                     <input className={styles.fileInput} type="file" name="videoFile"/>
 
-                    <input className={styles.button} type="submit" value={id ? 'Actualizar' : 'Enviar'}/>
-                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
+                    <input className={styles.button} type="submit" value={'Enviar'}/>
+                    {/* {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
                         'use server';
                         deleteForm(formData);
                         redirect(`/shows/?id=${id}`);
@@ -83,7 +83,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                     {id && (<input className={styles.button} type="submit" value="Cancelar" formAction={async () => {
                         'use server';
                         redirect(`/shows/?id=${id}`);
-                    }} />)}  
+                    }} />)}   */}
                 </form>)}
             </div>
         </section>
