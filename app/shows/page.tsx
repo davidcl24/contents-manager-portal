@@ -5,16 +5,18 @@ import ShowFetchedItems from "../fetch-data";
 import { redirect } from "next/navigation";
 import { ContentFormDropdown } from "../form-client";
 
-
 export default async function ShowPage({searchParams}: {searchParams: {id? :string}}) {
     const {id} = await searchParams;
     let showData: any = null;
-    let genresData: any[] = []
+    let episodesData: any = [];
+    let genresData: any[] = [];
 
     if (id) {
         const res = await fetch(`http://localhost:30000/shows/${id}`);
         if (res.ok) {
             showData = await res.json();
+            const resEps = await fetch(`http://localhost:30000/shows/${id}/episodes`);
+            episodesData = await resEps.json();
         }
     }
     const res = await fetch(`http://localhost:30000/genres`);
@@ -36,6 +38,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                     <ContentFormText question={"Title"} value={showData?.title ?? ""}/>
                     <ContentFormText question={"Synopsis"} value={showData?.synopsis ?? ""}/>
                     <ContentFormNumber question={"SeasonsNum"} value={showData?.seasons_num ?? ""}/>
+                    <ContentFormDropdown question="Episodes" items={episodesData} value={" "} />
                     <ContentFormDate question={"Date"} value={showData?.date ?? ""}/>
                     {/* <ContentFormNumber question={"GenreId"} value={showData?.genre_id ?? ""}/> */}
                     <ContentFormDropdown question={"GenreId"} items={genresData} value={showData?.genre_id ?? ""} />
@@ -56,6 +59,32 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                         redirect('/shows');
                     }} />)}  
                 </form>
+
+                {id && 
+                (<form className={styles.formWrapper} action={id ? patchFormMultipart : postFormMultipart}>
+                    <input type="hidden" name="url" value={"http://localhost:30000/episodes"}/>
+                    <ContentFormText question="Title" value="" />
+                    <ContentFormText question="Synopsis" value="" />
+                    <ContentFormNumber question="SeasonNum" value="" />
+                    <ContentFormNumber question="EpisodeNum" value="" />
+                    <ContentFormNumber question="Length" value="" />
+                    <ContentFormDate question="ReleaseDate" value="" />
+                    <label className={styles.label}>
+                        <input value={id} type='hidden' name={"show_id"} />
+                    </label>
+                    <input className={styles.fileInput} type="file" name="videoFile"/>
+
+                    <input className={styles.button} type="submit" value={id ? 'Actualizar' : 'Enviar'}/>
+                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
+                        'use server';
+                        deleteForm(formData);
+                        redirect(`/shows/?id=${id}`);
+                    }} />)} 
+                    {id && (<input className={styles.button} type="submit" value="Cancelar" formAction={async () => {
+                        'use server';
+                        redirect(`/shows/?id=${id}`);
+                    }} />)}  
+                </form>)}
             </div>
         </section>
     );
