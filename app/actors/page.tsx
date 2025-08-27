@@ -3,6 +3,7 @@ import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
 import { redirect } from "next/navigation";
+import { API_GATEWAY_URL } from "../constants/consts";
 
 
 export default async function ActorPage({searchParams}: {searchParams: {id? :string}}) {
@@ -10,7 +11,7 @@ export default async function ActorPage({searchParams}: {searchParams: {id? :str
     let actorData: any = null
 
     if (id) {
-        actorData = await fetchFromGateway(`http://localhost:30000/actors/${id}`);
+        actorData = await fetchFromGateway(`${API_GATEWAY_URL}/actors/${id}`);
     }
     return (
         <section>
@@ -19,10 +20,10 @@ export default async function ActorPage({searchParams}: {searchParams: {id? :str
             </div>
 
             <div className={stylesList.container}>
-                <ShowFetchedItems apiUrl="http://localhost:30000/actors" localUrl={"/actors/"} />
+                <ShowFetchedItems apiUrl={`${API_GATEWAY_URL}/actors`} localUrl={"/actors/"} />
 
                 <form className={styles.formWrapper} action={id ? patchFormJson : postFormJson}>
-                    <input type="hidden" name="url" value={id ? `http://localhost:30000/actors/${id}` : "http://localhost:30000/actors"} />
+                    <input type="hidden" name="url" value={id ? `${API_GATEWAY_URL}/actors/${id}` : `${API_GATEWAY_URL}/actors`} />
                     <ContentFormText question={"Name"} value={actorData?.name ?? ""}/>
                     <ContentFormDate question={"Birth"} value={actorData?.birth ?? ""}/>
                     <input className={styles.button} type="submit" value={id ? 'Actualizar' : 'Enviar'}/>

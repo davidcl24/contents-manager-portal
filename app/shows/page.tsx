@@ -4,6 +4,7 @@ import stylesList from '../list.module.css';
 import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
 import { redirect } from "next/navigation";
 import { ContentFormDropdown } from "../form-client";
+import { API_GATEWAY_URL } from "../constants/consts";
 
 export default async function ShowPage({searchParams}: {searchParams: {id? :string, episode_id?: string}}) {
     const {id, episode_id} = await searchParams;
@@ -13,13 +14,13 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
     let genresData: any[] = [];
 
     if (id) {
-        showData = await fetchFromGateway(`http://localhost:30000/shows/${id}`);
-        episodesData = await fetchFromGateway(`http://localhost:30000/shows/${id}/episodes`);
+        showData = await fetchFromGateway(`${API_GATEWAY_URL}/shows/${id}`);
+        episodesData = await fetchFromGateway(`${API_GATEWAY_URL}/shows/${id}/episodes`);
     }
     if (episode_id) {
-        episodeData = await fetchFromGateway(`http://localhost:30000/episodes/${episode_id}`);
+        episodeData = await fetchFromGateway(`${API_GATEWAY_URL}/episodes/${episode_id}`);
     }
-    genresData = await fetchFromGateway(`http://localhost:30000/genres`);
+    genresData = await fetchFromGateway(`${API_GATEWAY_URL}/genres`);
 
     return (
         <section>
@@ -28,10 +29,10 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
             </div>
 
             <div className={stylesList.container}>
-                <ShowFetchedItems apiUrl="http://localhost:30000/shows" localUrl={"/shows/"}/>
+                <ShowFetchedItems apiUrl={`${API_GATEWAY_URL}/shows`} localUrl={"/shows/"}/>
 
                 <form className={styles.formWrapper} action={id ? patchFormMultipart : postFormMultipart}>
-                    <input type="hidden" name="url" value={id ? `http://localhost:30000/shows/${id}` : "http://localhost:30000/shows"} />
+                    <input type="hidden" name="url" value={id ? `${API_GATEWAY_URL}/shows/${id}` : `${API_GATEWAY_URL}/shows`} />
                     <ContentFormText question={"Title"} value={showData?.title ?? ""}/>
                     <ContentFormText question={"Synopsis"} value={showData?.synopsis ?? ""}/>
                     <ContentFormNumber question={"SeasonsNum"} value={showData?.seasons_num ?? ""}/>

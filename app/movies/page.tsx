@@ -5,6 +5,7 @@ import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 import { ContentFormDropdown } from "../form-client";
 import { fetchFromGateway } from "../fetch-data";
+import { API_GATEWAY_URL } from "../constants/consts";
 
 export default async function MoviePage({searchParams}: {searchParams: {id? :string}}) {
     const {id} = await searchParams;
@@ -12,10 +13,10 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
     let genresData: any[] = [];
 
     if (id) {
-        movieData = await fetchFromGateway(`http://localhost:30000/movies/${id}`);
+        movieData = await fetchFromGateway(`${API_GATEWAY_URL}/movies/${id}`);
     }
 
-    genresData = await fetchFromGateway(`http://localhost:30000/genres`);
+    genresData = await fetchFromGateway(`${API_GATEWAY_URL}/genres`);
 
     return (
         <section>
@@ -24,10 +25,10 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
             </div>
 
             <div className={stylesList.container}>
-                <ShowFetchedItems apiUrl="http://localhost:30000/movies" localUrl={"/movies/"} />
+                <ShowFetchedItems apiUrl={`${API_GATEWAY_URL}/movies`} localUrl={"/movies/"} />
 
                 <form className={styles.formWrapper} action={id ? patchFormMultipart : postFormMultipart}>
-                    <input type="hidden" name="url" value={id ? `http://localhost:30000/movies/${id}` : "http://localhost:30000/movies"} />
+                    <input type="hidden" name="url" value={id ? `${API_GATEWAY_URL}/movies/${id}` : `${API_GATEWAY_URL}/movies`} />
                     <ContentFormText question={"Title"} value={movieData?.title ?? ""}/>
                     <ContentFormText question="Synopsis" value={movieData?.synopsis ?? ""}/>
                     <ContentFormNumber question={"Lenght"} value={movieData?.length ?? ""}/>
