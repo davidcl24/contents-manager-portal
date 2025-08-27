@@ -4,6 +4,7 @@ import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, 
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 import { ContentFormDropdown } from "../form-client";
+import { fetchFromGateway } from "../fetch-data";
 
 export default async function MoviePage({searchParams}: {searchParams: {id? :string}}) {
     const {id} = await searchParams;
@@ -11,15 +12,10 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
     let genresData: any[] = [];
 
     if (id) {
-        const res = await fetch(`http://localhost:30000/movies/${id}`)
-        if (res.ok) {
-            movieData = await res.json();
-        }
+        movieData = await fetchFromGateway(`http://localhost:30000/movies/${id}`);
     }
-    const res = await fetch(`http://localhost:30000/genres`);
-    if (res.ok){
-        genresData = await res.json();
-    }
+
+    genresData = await fetchFromGateway(`http://localhost:30000/genres`);
 
     return (
         <section>

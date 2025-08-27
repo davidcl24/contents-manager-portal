@@ -1,13 +1,14 @@
 import { redirect } from "next/navigation";
 import styles from './list.module.css'
 
-async function fetchFromGateway(url: string) {
+export async function fetchFromGateway(url: string) {
     const res = await fetch(url, {
         method: 'GET',
     });
 
-    const data = await res.json();
-    return data;
+    if (res.ok) {
+        return await res.json()
+    }
 }
 
 

@@ -1,7 +1,7 @@
 import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm} from "../form";
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
-import ShowFetchedItems from "../fetch-data";
+import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
 import { redirect } from "next/navigation";
 import { ContentFormDropdown } from "../form-client";
 
@@ -13,23 +13,13 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
     let genresData: any[] = [];
 
     if (id) {
-        const res = await fetch(`http://localhost:30000/shows/${id}`);
-        if (res.ok) {
-            showData = await res.json();
-            const resEps = await fetch(`http://localhost:30000/shows/${id}/episodes`);
-            episodesData = await resEps.json();
-        }
+        showData = await fetchFromGateway(`http://localhost:30000/shows/${id}`);
+        episodesData = await fetchFromGateway(`http://localhost:30000/shows/${id}/episodes`);
     }
     if (episode_id) {
-        const res = await fetch(`http://localhost:30000/episodes/${episode_id}`);
-        if (res.ok) {
-            episodeData = await res.json();
-        }
+        episodeData = await fetchFromGateway(`http://localhost:30000/episodes/${episode_id}`);
     }
-    const res = await fetch(`http://localhost:30000/genres`);
-    if (res.ok){
-        genresData = await res.json();
-    }
+    genresData = await fetchFromGateway(`http://localhost:30000/genres`);
 
     return (
         <section>

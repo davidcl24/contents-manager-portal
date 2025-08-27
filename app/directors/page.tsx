@@ -1,7 +1,7 @@
 import {ContentFormDate, ContentFormText, deleteForm, patchFormJson, postFormJson} from "../form";
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
-import ShowFetchedItems from "../fetch-data";
+import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
 import { redirect } from "next/navigation";
 
 
@@ -10,10 +10,7 @@ export default async function DirectorPage({searchParams}: {searchParams: {id? :
     let directorData: any = null
 
     if (id) {
-        const res = await fetch(`http://localhost:30000/directors/${id}`)
-        if (res.ok) {
-            directorData = await res.json();
-        }
+        directorData = await fetchFromGateway(`http://localhost:30000/directors/${id}`);
     }
     return (
         <section>

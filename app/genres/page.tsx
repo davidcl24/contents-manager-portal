@@ -1,7 +1,7 @@
 import {ContentFormText, deleteForm, patchFormJson, postFormJson} from "../form";
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
-import ShowFetchedItems from "../fetch-data";
+import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
 import { redirect } from "next/navigation";
 
 
@@ -10,10 +10,7 @@ export default async function GenrePage({searchParams}: {searchParams: {id? :str
     let genreData: any = null
 
     if (id) {
-        const res = await fetch(`http://localhost:30000/genres/${id}`)
-        if (res.ok) {
-            genreData = await res.json();
-        }
+        genreData = await fetchFromGateway(`http://localhost:30000/genres/${id}`);
     }
     return (
         <section>
