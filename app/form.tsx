@@ -90,10 +90,18 @@ export function ContentFormText({question, value}: {question: string, value: str
     );
 }
 
-export function ContentFormNumber({question, value}: {question: string, value: string}) {
+export function ContentFormFloat({question, value}: {question: string, value: string}) {
     return (
         <label className={styles.label}>
             <input defaultValue={value} className={styles.input} placeholder={question} type='number' step="0.01" min={0} max={10} name={question.split(/\.?(?=[A-Z])/).join('_').toLowerCase()} />
+        </label>
+    );
+}
+
+export function ContentFormNumber({question, value}: {question: string, value: string}) {
+    return (
+        <label className={styles.label}>
+            <input defaultValue={value} className={styles.input} placeholder={question} type='number' name={question.split(/\.?(?=[A-Z])/).join('_').toLowerCase()} />
         </label>
     );
 }

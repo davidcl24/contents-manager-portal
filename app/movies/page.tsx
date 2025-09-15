@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import ShowFetchedItems from "../fetch-data";
-import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm} from "../form";
+import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm, ContentFormFloat} from "../form";
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 import { ContentFormDropdown } from "../form-client";
@@ -36,7 +36,7 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
                     {/* <ContentFormNumber question={"GenreId"} value={movieData?.genre_id ?? ""}/> */}
                     <ContentFormDropdown question={"GenreId"} items={genresData} value={movieData?.genre_id ?? ""} />
                     <ContentFormText question={"PosterUrl"} value={movieData?.poster_url ?? ""}/>
-                    <ContentFormNumber question={"Rating"} value={movieData?.rating ?? ""}/>
+                    <ContentFormFloat question={"Rating"} value={movieData?.rating ?? ""}/>
                     <label className={styles.label}>
                         Is published
                         <input type="checkbox" name="is_published"/>

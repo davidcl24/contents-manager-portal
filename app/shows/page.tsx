@@ -1,4 +1,4 @@
-import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm} from "../form";
+import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm, ContentFormFloat} from "../form";
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
@@ -41,7 +41,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                     {/* <ContentFormNumber question={"GenreId"} value={showData?.genre_id ?? ""}/> */}
                     <ContentFormDropdown question={"GenreId"} items={genresData} value={showData?.genre_id ?? ""} />
                     <ContentFormText question={"PosterUrl"} value={showData?.poster_url ?? ""}/>
-                    <ContentFormNumber question={"Rating"} value={showData?.rating ?? ""}/>
+                    <ContentFormFloat question={"Rating"} value={showData?.rating ?? ""}/>
                     <label className={styles.label}>
                         Is published
                         <input type="checkbox" name="is_published"/>
