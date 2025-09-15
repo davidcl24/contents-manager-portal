@@ -72,7 +72,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                     </label>
                     <input className={styles.fileInput} type="file" name="videoFile"/>
 
-                    <input className={styles.button} type="submit" value={'Enviar'}/>
+                    <input className={styles.button} type="submit" value={episode_id ? 'Actualizar' : 'Enviar'}/>
                     {episode_id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
                         'use server';
                         deleteForm(formData);
