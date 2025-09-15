@@ -1,4 +1,4 @@
-import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm, ContentFormFloat} from "../form";
+import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm, ContentFormFloat, ContentFormTextArea} from "../form";
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
@@ -34,7 +34,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                 <form className={styles.formWrapper} action={id ? patchFormMultipart : postFormMultipart}>
                     <input type="hidden" name="url" value={id ? `${API_GATEWAY_URL}/shows/${id}` : `${API_GATEWAY_URL}/shows`} />
                     <ContentFormText question={"Title"} value={showData?.title ?? ""}/>
-                    <ContentFormText question={"Synopsis"} value={showData?.synopsis ?? ""}/>
+                    <ContentFormTextArea question={"Synopsis"} value={showData?.synopsis ?? ""}/>
                     <ContentFormNumber question={"SeasonsNum"} value={showData?.seasons_num ?? ""}/>
                     <ContentFormDropdown question="Episodes" items={episodesData} value={" "} />
                     <ContentFormDate question={"ReleaseDate"} value={showData?.release_date ?? ""}/>
@@ -62,7 +62,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                 (<form className={styles.formWrapper} action={episode_id ? patchFormMultipart : postFormMultipart}>
                     <input type="hidden" name="url" value={episodeData ? `http://localhost:30000/episodes/${episode_id}` : "http://localhost:30000/episodes"}/>
                     <ContentFormText question="Title" value={episodeData?.title ?? ""} />
-                    <ContentFormText question="Synopsis" value={episodeData?.synopsis ?? ""} />
+                    <ContentFormTextArea question="Synopsis" value={episodeData?.synopsis ?? ""} />
                     <ContentFormNumber question="SeasonNum" value={episodeData?.season_num ?? ""} />
                     <ContentFormNumber question="EpisodeNum" value={episodeData?.episode_num ?? ""} />
                     <ContentFormNumber question="Length" value={episodeData?.length ?? ""} />

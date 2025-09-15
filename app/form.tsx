@@ -90,6 +90,14 @@ export function ContentFormText({question, value}: {question: string, value: str
     );
 }
 
+export function ContentFormTextArea({question, value}: {question: string, value: string}) {
+    return (
+        <label className={styles.label}>
+            <textarea defaultValue={value} className={styles.input} placeholder={question} rows={5} cols={30} name={question.split(/\.?(?=[A-Z])/).join('_').toLowerCase()} />
+        </label>
+    );
+}
+
 export function ContentFormFloat({question, value}: {question: string, value: string}) {
     return (
         <label className={styles.label}>

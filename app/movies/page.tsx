@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import ShowFetchedItems from "../fetch-data";
-import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm, ContentFormFloat} from "../form";
+import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm, ContentFormFloat, ContentFormTextArea} from "../form";
 import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 import { ContentFormDropdown } from "../form-client";
@@ -30,7 +30,7 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
                 <form className={styles.formWrapper} action={id ? patchFormMultipart : postFormMultipart}>
                     <input type="hidden" name="url" value={id ? `${API_GATEWAY_URL}/movies/${id}` : `${API_GATEWAY_URL}/movies`} />
                     <ContentFormText question={"Title"} value={movieData?.title ?? ""}/>
-                    <ContentFormText question="Synopsis" value={movieData?.synopsis ?? ""}/>
+                    <ContentFormTextArea question="Synopsis" value={movieData?.synopsis ?? ""}/>
                     <ContentFormNumber question={"Lenght"} value={movieData?.length ?? ""}/>
                     <ContentFormDate question={"ReleaseDate"} value={movieData?.release_date ?? ""}/>
                     {/* <ContentFormNumber question={"GenreId"} value={movieData?.genre_id ?? ""}/> */}
