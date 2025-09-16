@@ -3,7 +3,7 @@ import styles from '../form.module.css';
 import stylesList from '../list.module.css';
 import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
 import { redirect } from "next/navigation";
-import { ContentFormDropdown } from "../form-client";
+import { ContentFormDropdown, ContentFormDropdownMultiple } from "../form-client";
 import { API_GATEWAY_URL } from "../constants/consts";
 
 export default async function ShowPage({searchParams}: {searchParams: {id? :string, episode_id?: string}}) {
@@ -12,6 +12,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
     let episodeData: any = null;
     let episodesData: any = [];
     let genresData: any[] = [];
+    let directorsData: any[] = [];
 
     if (id) {
         showData = await fetchFromGateway(`${API_GATEWAY_URL}/shows/${id}`);
@@ -21,6 +22,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
         episodeData = await fetchFromGateway(`${API_GATEWAY_URL}/episodes/${episode_id}`);
     }
     genresData = await fetchFromGateway(`${API_GATEWAY_URL}/genres`);
+    directorsData = await fetchFromGateway(`${API_GATEWAY_URL}/directors`);
 
     return (
         <section>
@@ -40,6 +42,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                     <ContentFormDate question={"ReleaseDate"} value={showData?.release_date ?? ""}/>
                     {/* <ContentFormNumber question={"GenreId"} value={showData?.genre_id ?? ""}/> */}
                     <ContentFormDropdown question={"GenreId"} items={genresData} value={showData?.genre_id ?? ""} />
+                    <ContentFormDropdownMultiple question={"DirectorsIds"} items={directorsData} value="" />
                     <ContentFormText question={"PosterUrl"} value={showData?.poster_url ?? ""}/>
                     <ContentFormFloat question={"Rating"} value={showData?.rating ?? ""}/>
                     <label className={styles.label}>
