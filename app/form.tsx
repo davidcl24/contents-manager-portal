@@ -6,7 +6,8 @@ export async function deleteForm(formData: FormData) {
     try {
         const url = formData.get('url') as string;
         const res = await fetch (url, {
-            method: 'DELETE'
+            method: 'DELETE',
+            credentials: 'include',
         });
     } catch (err) {
         console.error(err);
@@ -20,6 +21,7 @@ export async function postFormMultipart(formData: FormData) {
         const url = formData.get('url') as string;
         const res = await fetch (url, {
             method: 'POST',
+            credentials: 'include',
             body: formData
         });
     } catch (err) {
@@ -35,6 +37,7 @@ export async function patchFormMultipart(formData: FormData) {
         const url = formData.get('url') as string;
         const res = await fetch (url, {
             method: 'PATCH',
+            credentials: 'include',
             body: formData
         });
     } catch (err) {
@@ -52,6 +55,7 @@ export async function postFormJson(formData: FormData) {
 
         const res = await fetch (url, {
             method: 'POST',
+            credentials: 'include',
             headers: { 
                 "Content-Type": "application/json"
             },
@@ -71,6 +75,7 @@ export async function patchFormJson(formData: FormData) {
 
         const res = await fetch(url, {
             method: 'PATCH',
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
             },
