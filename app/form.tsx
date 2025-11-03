@@ -1,12 +1,17 @@
 import { revalidatePath } from 'next/cache';
 import styles from './form.module.css';
+import { getCookieHeader } from './fetch-data';
 
 export async function deleteForm(formData: FormData) {
     'use server';
+    const cookieHeader = await getCookieHeader();
     try {
         const url = formData.get('url') as string;
         const res = await fetch (url, {
             method: 'DELETE',
+            headers: {
+                Cookie: cookieHeader || '',
+            },
             credentials: 'include',
         });
     } catch (err) {
@@ -17,11 +22,15 @@ export async function deleteForm(formData: FormData) {
 
 export async function postFormMultipart(formData: FormData) {
     'use server';
+    const cookieHeader = await getCookieHeader();
     try {
         const url = formData.get('url') as string;
         const res = await fetch (url, {
             method: 'POST',
             credentials: 'include',
+            headers: {
+                Cookie: cookieHeader || '',
+            },
             body: formData
         });
     } catch (err) {
@@ -33,11 +42,15 @@ export async function postFormMultipart(formData: FormData) {
 
 export async function patchFormMultipart(formData: FormData) {
     'use server';
+    const cookieHeader = await getCookieHeader();
     try {
         const url = formData.get('url') as string;
         const res = await fetch (url, {
             method: 'PATCH',
             credentials: 'include',
+            headers: {
+                Cookie: cookieHeader || '',
+            },
             body: formData
         });
     } catch (err) {
@@ -49,6 +62,7 @@ export async function patchFormMultipart(formData: FormData) {
 
 export async function postFormJson(formData: FormData) {
     'use server';
+    const cookieHeader = await getCookieHeader();
     try {
         const url = formData.get('url') as string;
         const body = Object.fromEntries(formData.entries());
@@ -57,7 +71,8 @@ export async function postFormJson(formData: FormData) {
             method: 'POST',
             credentials: 'include',
             headers: { 
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                Cookie: cookieHeader || '',
             },
             body: JSON.stringify(body)
         });
@@ -69,6 +84,7 @@ export async function postFormJson(formData: FormData) {
 
 export async function patchFormJson(formData: FormData) {
     'use server';
+    const cookieHeader = await getCookieHeader();
     try {
         const url = formData.get('url') as string;
         const body = Object.fromEntries(formData.entries());
@@ -77,7 +93,8 @@ export async function patchFormJson(formData: FormData) {
             method: 'PATCH',
             credentials: 'include',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json", 
+                Cookie: cookieHeader || '',
             },
             body: JSON.stringify(body)
         });

@@ -1,9 +1,27 @@
 import { redirect } from "next/navigation";
 import styles from './list.module.css'
+import { cookies } from "next/headers";
+
+export async function getCookieHeader() {
+    const cookieStore = await cookies();
+    const allCookies = cookieStore.getAll();
+
+    const relevantCookies = allCookies.filter(cookie => 
+        ['access_token', 'refresh_token'].includes(cookie.name)
+    );
+
+    const cookieHeader = relevantCookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ');
+    return cookieHeader;
+}
 
 export async function fetchFromGateway(url: string) {
+    'use server';
+    const cookieHeader = await getCookieHeader();
     const res = await fetch(url, {
         method: 'GET',
+        headers: {
+            Cookie: cookieHeader || '',
+        },
         credentials: 'include',
     });
 
