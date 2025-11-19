@@ -44,8 +44,8 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                     <ContentFormDate question={"ReleaseDate"} value={showData?.release_date ?? ""}/>
                     {/* <ContentFormNumber question={"GenreId"} value={showData?.genre_id ?? ""}/> */}
                     <ContentFormDropdown question={"GenreId"} items={genresData} value={showData?.genre_id ?? ""} />
-                    <ContentFormDropdownMultiple question={"DirectorsIds"} items={directorsData} value="" />
-                    <ContentFormDropdownMultiple question={"ActorsIds"} items={actorsData} value="" />
+                    <ContentFormDropdownMultiple question={"DirectorsIds"} items={directorsData} value={null} />
+                    <ContentFormDropdownMultiple question={"ActorsIds"} items={actorsData} value={null} />
                     <ContentFormText question={"PosterUrl"} value={showData?.poster_url ?? ""}/>
                     <ContentFormFloat question={"Rating"} value={showData?.rating ?? ""}/>
                     <label className={styles.label}>

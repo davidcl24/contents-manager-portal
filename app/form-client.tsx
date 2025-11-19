@@ -29,16 +29,22 @@ export function ContentFormDropdown({question, items, value}: {question: string,
     )
 }
 
-export function ContentFormDropdownMultiple({question, items, value}: {question: string, items: any[], value: string}) {
-    const [selected, setSelected] = useState(value || "");
-    useEffect(() => { setSelected(value || ""); }, [value]);
+export function ContentFormDropdownMultiple({question, items, value}: {question: string, items: any[], value: string[] | null}) {
+    const [selected, setSelected] = useState<string[]>(value || []);
+    useEffect(() => { setSelected(value || []); }, [value]);
 
     const nameAndId = question.split(/\.?(?=[A-Z])/).join('_').toLowerCase();
     return (
         <select  className={styles.input}
-                    name={nameAndId}
+                    name={`${nameAndId}[]`}
                     id={nameAndId}
-                    multiple>
+                    multiple
+                    value={selected}
+                    onChange={(e) => {
+                        const values = Array.from(e.target.selectedOptions, opt => opt.value);
+                        setSelected(values);
+                    }}
+                >
             <option disabled={!!value} value={""}> -- select an option -- </option>
             {items.map((item) => (
                 <option key={item.id} className={styles.input} value={item.id}>{item.name ?? item.title}</option>

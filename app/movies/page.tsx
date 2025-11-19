@@ -39,8 +39,8 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
                     <ContentFormDate question={"ReleaseDate"} value={movieData?.release_date ?? ""}/>
                     {/* <ContentFormNumber question={"GenreId"} value={movieData?.genre_id ?? ""}/> */}
                     <ContentFormDropdown question={"GenreId"} items={genresData} value={movieData?.genre_id ?? ""} />
-                    <ContentFormDropdownMultiple question={"DirectorsIds"} items={directorsData} value="" />
-                    <ContentFormDropdownMultiple question={"ActorsIds"} items={actorsData} value="" />
+                    <ContentFormDropdownMultiple question={"DirectorsIds"} items={directorsData} value={null} />
+                    <ContentFormDropdownMultiple question={"ActorsIds"} items={actorsData} value={null} />
                     <ContentFormText question={"PosterUrl"} value={movieData?.poster_url ?? ""}/>
                     <ContentFormFloat question={"Rating"} value={movieData?.rating ?? ""}/>
                     <label className={styles.label}>
