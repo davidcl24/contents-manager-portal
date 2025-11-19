@@ -10,9 +10,10 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
     const {id, episode_id} = await searchParams;
     let showData: any = null;
     let episodeData: any = null;
-    let episodesData: any = [];
+    let episodesData: any[] = [];
     let genresData: any[] = [];
     let directorsData: any[] = [];
+    let actorsData: any[] = [];
 
     if (id) {
         showData = await fetchFromGateway(`${API_GATEWAY_URL}/shows/${id}`);
@@ -23,6 +24,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
     }
     genresData = await fetchFromGateway(`${API_GATEWAY_URL}/genres`);
     directorsData = await fetchFromGateway(`${API_GATEWAY_URL}/directors`);
+    actorsData = await fetchFromGateway(`${API_GATEWAY_URL}/actors`);
 
     return (
         <section>
@@ -43,6 +45,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                     {/* <ContentFormNumber question={"GenreId"} value={showData?.genre_id ?? ""}/> */}
                     <ContentFormDropdown question={"GenreId"} items={genresData} value={showData?.genre_id ?? ""} />
                     <ContentFormDropdownMultiple question={"DirectorsIds"} items={directorsData} value="" />
+                    <ContentFormDropdownMultiple question={"ActorsIds"} items={actorsData} value="" />
                     <ContentFormText question={"PosterUrl"} value={showData?.poster_url ?? ""}/>
                     <ContentFormFloat question={"Rating"} value={showData?.rating ?? ""}/>
                     <label className={styles.label}>

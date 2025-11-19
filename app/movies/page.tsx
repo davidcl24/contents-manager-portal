@@ -11,7 +11,8 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
     const {id} = await searchParams;
     let movieData: any = null;
     let genresData: any[] = [];
-    let directorsData: any = [];
+    let directorsData: any[] = [];
+    let actorsData: any[] = [];
 
     if (id) {
         movieData = await fetchFromGateway(`${API_GATEWAY_URL}/movies/${id}`);
@@ -19,6 +20,7 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
 
     genresData = await fetchFromGateway(`${API_GATEWAY_URL}/genres`);
     directorsData = await fetchFromGateway(`${API_GATEWAY_URL}/directors`);
+    actorsData = await fetchFromGateway(`${API_GATEWAY_URL}/actors`);
 
     return (
         <section>
@@ -38,6 +40,7 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
                     {/* <ContentFormNumber question={"GenreId"} value={movieData?.genre_id ?? ""}/> */}
                     <ContentFormDropdown question={"GenreId"} items={genresData} value={movieData?.genre_id ?? ""} />
                     <ContentFormDropdownMultiple question={"DirectorsIds"} items={directorsData} value="" />
+                    <ContentFormDropdownMultiple question={"ActorsIds"} items={actorsData} value="" />
                     <ContentFormText question={"PosterUrl"} value={movieData?.poster_url ?? ""}/>
                     <ContentFormFloat question={"Rating"} value={movieData?.rating ?? ""}/>
                     <label className={styles.label}>
