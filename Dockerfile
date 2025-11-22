@@ -47,6 +47,6 @@ COPY --from=build /app/public ./public
 COPY --from=build /app/package*.json ./
 COPY --from=build /app/next.config.js ./
 
-EXPOSE 3333
+EXPOSE 3000
 
 CMD ["npm", "start"]
