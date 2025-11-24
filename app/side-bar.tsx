@@ -2,14 +2,25 @@
 
 import Link from "next/link";
 
+/**
+ * @summary Opens the lateral navegation bar
+ */
 export function openNav() {
   document.getElementById("mySidenav")!.style.width = "250px";
 }
 
+/**
+ * @summary Closes the lateral navegation bar
+ */
 function closeNav() {
   document.getElementById("mySidenav")!.style.width = "0";
 }
 
+/**
+ * @summary Dinamically builds a lateral navigation bar with keywords passed as params
+ * @param links - Array of keywords that the function will use to build the links
+ * @returns HTML component
+ */
 export default function SideBar({links}: {links: string[]} ) {
   return (
     <div id="mySidenav" className="sidenav">

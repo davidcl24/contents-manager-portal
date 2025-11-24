@@ -4,7 +4,11 @@ import { useEffect, useState } from "react";
 import styles from './form.module.css';
 import { redirect, usePathname, useSearchParams } from "next/navigation";
 
-
+/**
+ * @summary It creates a component for a dropdown selection of items (only one can be selected at a time)
+ * @param params - The text for the name, the items that will be displayed, and the defualt value
+ * @returns HTML component
+ */
 export function ContentFormDropdown({question, items, value}: {question: string, items: any[], value: string}) {
     const [selected, setSelected] = useState(value || "");
     useEffect(() => { setSelected(value || ""); }, [value]);
@@ -29,6 +33,11 @@ export function ContentFormDropdown({question, items, value}: {question: string,
     )
 }
 
+/**
+ * @summary It creates a component for a dropdown selection of multple items (multiple can be selected)
+ * @param params - The text for the name, the items that will be displayed, and the defualt value
+ * @returns HTML component
+ */
 export function ContentFormDropdownMultiple({question, items, value}: {question: string, items: any[], value: string[] | null}) {
     const [selected, setSelected] = useState<string[]>(value || []);
     useEffect(() => { setSelected(value || []); }, [value]);

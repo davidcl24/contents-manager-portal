@@ -7,6 +7,11 @@ import { ContentFormDropdown, ContentFormDropdownMultiple } from "../form-client
 import { fetchFromGateway } from "../fetch-data";
 import { API_GATEWAY_URL } from "../constants/consts";
 
+/**
+ * @summary Creates a component to manage the creation and modification of movies
+ * @param searchParams - ID of the selected movie
+ * @returns HTML component
+ */
 export default async function MoviePage({searchParams}: {searchParams: {id? :string}}) {
     const {id} = await searchParams;
     let movieData: any = null;

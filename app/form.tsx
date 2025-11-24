@@ -2,6 +2,10 @@ import { revalidatePath } from 'next/cache';
 import styles from './form.module.css';
 import { getCookieHeader } from './fetch-data';
 
+/**
+ * @summary It sends a DELETE request to the backend for the currently displayed on the form
+ * @param formData - All of the contents that come from the form
+ */
 export async function deleteForm(formData: FormData) {
     'use server';
     const cookieHeader = await getCookieHeader();
@@ -20,6 +24,10 @@ export async function deleteForm(formData: FormData) {
     revalidatePath('/');
 }
 
+/**
+ * @summary It sends a POST request to the backend with the data from the form sent as multipart
+ * @param formData - All of the contents that come from the form
+ */
 export async function postFormMultipart(formData: FormData) {
     'use server';
     const cookieHeader = await getCookieHeader();
@@ -39,7 +47,10 @@ export async function postFormMultipart(formData: FormData) {
     revalidatePath('/');
 }
 
-
+/**
+ * @summary It sents a PATCH request to the backend with the data from the form sent as multpart
+ * @param formData - All of the contents that come from the form
+ */
 export async function patchFormMultipart(formData: FormData) {
     'use server';
     const cookieHeader = await getCookieHeader();
@@ -59,7 +70,10 @@ export async function patchFormMultipart(formData: FormData) {
     revalidatePath('/');
 }
 
-
+/**
+ * @summary It sends a POST request to the backend with the data from the form sent as JSON
+ * @param formData - All of the contents that come from the form
+ */
 export async function postFormJson(formData: FormData) {
     'use server';
     const cookieHeader = await getCookieHeader();
@@ -82,6 +96,10 @@ export async function postFormJson(formData: FormData) {
     revalidatePath('/');
 }
 
+/**
+ * @summary It sends a PATCH request to the backend with the data from the form sent as JSON
+ * @param formData - All of the contents that come from the form
+ */
 export async function patchFormJson(formData: FormData) {
     'use server';
     const cookieHeader = await getCookieHeader();
@@ -104,6 +122,11 @@ export async function patchFormJson(formData: FormData) {
     revalidatePath('/');
 }
 
+/**
+ * @summary HTML Component to input text (one line)
+ * @param question - The string that will be used as name and the default value in case there was one
+ * @returns HTML component
+ */
 export function ContentFormText({question, value}: {question: string, value: string}) {
     return (
         <label className={styles.label}>
@@ -112,6 +135,11 @@ export function ContentFormText({question, value}: {question: string, value: str
     );
 }
 
+/**
+ * @summary HTML Component to input text (multiline)
+ * @param question - The string that will be used as name and the default value in case there was one
+ * @returns HTML component
+ */
 export function ContentFormTextArea({question, value}: {question: string, value: string}) {
     return (
         <label className={styles.label}>
@@ -120,6 +148,11 @@ export function ContentFormTextArea({question, value}: {question: string, value:
     );
 }
 
+/**
+ * @summary HTML component to input floating point values
+ * @param question - The string that will be used as name and the default value in case there was one
+ * @returns HTML component
+ */
 export function ContentFormFloat({question, value}: {question: string, value: string}) {
     return (
         <label className={styles.label}>
@@ -128,6 +161,11 @@ export function ContentFormFloat({question, value}: {question: string, value: st
     );
 }
 
+/**
+ * @summary HTML component to input integer values
+ * @param question - The string that will be used as name and the default value in case there was one
+ * @returns HTML component
+ */
 export function ContentFormNumber({question, value}: {question: string, value: string}) {
     return (
         <label className={styles.label}>
@@ -136,6 +174,11 @@ export function ContentFormNumber({question, value}: {question: string, value: s
     );
 }
 
+/**
+ * @summary HTML component to input date values 
+ * @param question - The string that will be used as name and the default value in case there was one
+ * @returns HTML component
+ */
 export function ContentFormDate({question, value}: {question: string, value: string}) {
     return (
         <label className={styles.label} key={question}>

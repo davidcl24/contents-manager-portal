@@ -6,6 +6,11 @@ import { redirect } from "next/navigation";
 import { ContentFormDropdown, ContentFormDropdownMultiple } from "../form-client";
 import { API_GATEWAY_URL } from "../constants/consts";
 
+/**
+ * @summary Creates a component to manage the creation and modification of shows
+ * @param searchParams - ID of the selected show and ID of the selected episode
+ * @returns HTML component
+ */
 export default async function ShowPage({searchParams}: {searchParams: {id? :string, episode_id?: string}}) {
     const {id, episode_id} = await searchParams;
     let showData: any = null;

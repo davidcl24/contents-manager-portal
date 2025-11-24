@@ -2,6 +2,10 @@ import { redirect } from "next/navigation";
 import styles from './list.module.css'
 import { cookies } from "next/headers";
 
+/**
+ * @summary It takes the cookies from the request and returns a formated cookie header
+ * @returns cookie header
+ */
 export async function getCookieHeader() {
     const cookieStore = await cookies();
     const allCookies = cookieStore.getAll();
@@ -14,6 +18,11 @@ export async function getCookieHeader() {
     return cookieHeader;
 }
 
+/**
+ * @summary It fetches items from the backend
+ * @param url - The URL to fetch from
+ * @returns JSON body of the reply
+ */
 export async function fetchFromGateway(url: string) {
     'use server';
     const cookieHeader = await getCookieHeader();
@@ -31,7 +40,11 @@ export async function fetchFromGateway(url: string) {
 }
 
 
-
+/**
+ * @summary Creates a component that shows a list of fetched items
+ * @param params - URL to make the request from and URL from the same site that the user will get redirected to 
+ * @returns HTML component
+ */
 export default async function ShowFetchedItems({apiUrl, localUrl}: {apiUrl: string, localUrl: string}) {
     const data = await fetchFromGateway(apiUrl);
     const items = Array.isArray(data) ? data : [];

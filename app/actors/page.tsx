@@ -5,7 +5,11 @@ import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
 import { redirect } from "next/navigation";
 import { API_GATEWAY_URL } from "../constants/consts";
 
-
+/**
+ * @summary Creates a component to manage the creation and modification of actors
+ * @param searchParams - ID of the selected actor
+ * @returns HTML component
+ */
 export default async function ActorPage({searchParams}: {searchParams: {id? :string}}) {
     const {id} = await searchParams;
     let actorData: any = null

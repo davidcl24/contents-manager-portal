@@ -5,7 +5,11 @@ import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
 import { redirect } from "next/navigation";
 import { API_GATEWAY_URL } from "../constants/consts";
 
-
+/**
+ * @summary Creates a component to manage the creation and modification of genres
+ * @param searchParams - ID of the selected genre
+ * @returns HTML component
+ */
 export default async function GenrePage({searchParams}: {searchParams: {id? :string}}) {
     const {id} = await searchParams;
     let genreData: any = null

@@ -5,7 +5,11 @@ import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
 import { redirect } from "next/navigation";
 import { API_GATEWAY_URL } from "../constants/consts";
 
-
+/**
+ * @summary Creates a component to manage the creation and modification of directors
+ * @param searchParams - ID of the selected director
+ * @returns HTML component
+ */
 export default async function DirectorPage({searchParams}: {searchParams: {id? :string}}) {
     const {id} = await searchParams;
     let directorData: any = null
