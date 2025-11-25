@@ -5,7 +5,7 @@ This is a backoffice portal to manage the creation and update of contents
 ## Characteristics
 
 * It allows admins to upload new content and modify existing one with a simple, intuitive GUI.
-* It allos for the management of each of the following contents:
+* It allows for the management of each of the following contents:
     * Actors
     * Directors
     * Genres
