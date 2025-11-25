@@ -1,4 +1,8 @@
+# Contents Manger Portal
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+
+It is a backoffice portal to manage the creation and update of contents
 
 ## Getting Started
 
