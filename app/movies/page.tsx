@@ -40,7 +40,7 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
                     <input type="hidden" name="url" value={id ? `${API_GATEWAY_URL}/movies/${id}` : `${API_GATEWAY_URL}/movies`} />
                     <ContentFormText question={"Title"} value={movieData?.title ?? ""}/>
                     <ContentFormTextArea question="Synopsis" value={movieData?.synopsis ?? ""}/>
-                    <ContentFormNumber question={"Lenght"} value={movieData?.length ?? ""}/>
+                    <ContentFormNumber question={"Length"} value={movieData?.length ?? ""}/>
                     <ContentFormDate question={"ReleaseDate"} value={movieData?.release_date ?? ""}/>
                     {/* <ContentFormNumber question={"GenreId"} value={movieData?.genre_id ?? ""}/> */}
                     <ContentFormDropdown question={"GenreId"} items={genresData} value={movieData?.genre_id ?? ""} />
