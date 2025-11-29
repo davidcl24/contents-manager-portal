@@ -71,7 +71,7 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
 
                 {id && 
                 (<form className={styles.formWrapper} action={episode_id ? patchFormMultipart : postFormMultipart}>
-                    <input type="hidden" name="url" value={episodeData ? `http://localhost:30000/episodes/${episode_id}` : "http://localhost:30000/episodes"}/>
+                    <input type="hidden" name="url" value={episodeData ? `${API_GATEWAY_URL}/episodes/${episode_id}` : `${API_GATEWAY_URL}/episodes`}/>
                     <ContentFormText question="Title" value={episodeData?.title ?? ""} />
                     <ContentFormTextArea question="Synopsis" value={episodeData?.synopsis ?? ""} />
                     <ContentFormNumber question="SeasonNum" value={episodeData?.season_num ?? ""} />
