@@ -27,6 +27,10 @@ export default function SideBar({links}: {links: string[]} ) {
       {links.map((link)=> (
         <Link key={link} href={link === "Home" ? "/" : `/${link.toLowerCase()}`} className="sidenav-link">{link} <br/></Link>
       ))}
+
+       <Link href="/log-out" className="absolute bottom-4 left-4 text-sm text-gray-400 hover:text-white">
+        Cerrar sesión
+      </Link>
       <span onClick={closeNav} className="closebtn">X</span>
     </div>
   )

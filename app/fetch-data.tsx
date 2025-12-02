@@ -34,9 +34,14 @@ export async function fetchFromGateway(url: string) {
         credentials: 'include',
     });
 
-    if (res.ok) {
-        return await res.json()
+    
+    if (!res.ok) {
+        if (res.status == 401) {
+            redirect('/login');
+        }
+        throw new Error(`Error HTTP: ${res.status}`);
     }
+    return await res.json();
 }
 
 

@@ -1,10 +1,10 @@
-import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm, ContentFormFloat, ContentFormTextArea} from "../form";
-import styles from '../form.module.css';
-import stylesList from '../list.module.css';
-import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
+import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm, ContentFormFloat, ContentFormTextArea} from "../../form";
+import styles from '../../form.module.css';
+import stylesList from '../../list.module.css';
+import ShowFetchedItems, { fetchFromGateway } from "../../fetch-data";
 import { redirect } from "next/navigation";
-import { ContentFormDropdown, ContentFormDropdownMultiple } from "../form-client";
-import { API_GATEWAY_URL } from "../constants/consts";
+import { ContentFormDropdown, ContentFormDropdownMultiple } from "../../form-client";
+import { API_GATEWAY_URL } from "../../constants/consts";
 
 /**
  * @summary Creates a component to manage the creation and modification of shows

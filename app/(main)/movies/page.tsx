@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
-import ShowFetchedItems from "../fetch-data";
-import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm, ContentFormFloat, ContentFormTextArea} from "../form";
-import styles from '../form.module.css';
-import stylesList from '../list.module.css';
-import { ContentFormDropdown, ContentFormDropdownMultiple } from "../form-client";
-import { fetchFromGateway } from "../fetch-data";
-import { API_GATEWAY_URL } from "../constants/consts";
+import ShowFetchedItems from "../../fetch-data";
+import {postFormMultipart ,ContentFormDate, ContentFormNumber, ContentFormText, patchFormMultipart, deleteForm, ContentFormFloat, ContentFormTextArea} from "../../form";
+import styles from '../../form.module.css';
+import stylesList from '../../list.module.css';
+import { ContentFormDropdown, ContentFormDropdownMultiple } from "../../form-client";
+import { fetchFromGateway } from "../../fetch-data";
+import { API_GATEWAY_URL } from "../../constants/consts";
 
 /**
  * @summary Creates a component to manage the creation and modification of movies

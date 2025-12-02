@@ -1,9 +1,9 @@
-import {ContentFormDate, ContentFormText, deleteForm, patchFormJson, postFormJson} from "../form";
-import styles from '../form.module.css';
-import stylesList from '../list.module.css';
-import ShowFetchedItems, { fetchFromGateway } from "../fetch-data";
+import {ContentFormDate, ContentFormText, deleteForm, patchFormJson, postFormJson} from "../../form";
+import styles from '../../form.module.css';
+import stylesList from '../../list.module.css';
+import ShowFetchedItems, { fetchFromGateway } from "../../fetch-data";
 import { redirect } from "next/navigation";
-import { API_GATEWAY_URL } from "../constants/consts";
+import { API_GATEWAY_URL } from "../../constants/consts";
 
 /**
  * @summary Creates a component to manage the creation and modification of directors
