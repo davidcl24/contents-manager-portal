@@ -40,11 +40,6 @@ export default function LoginPage() {
           value={loading ? 'Loading...' : 'Log In'} 
           disabled={loading} 
         />
-        <br /> <br />
-        <div className="text-black">
-             You don&apos;t have an account yet? &nbsp;
-            <Link className="text-blue-600 dark:text-blue-500 hover:underline" href='/register'>Create one</Link>
-        </div>
       </form>
     </div>
   );
