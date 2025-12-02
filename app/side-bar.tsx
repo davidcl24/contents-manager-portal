@@ -29,7 +29,7 @@ export default function SideBar({links}: {links: string[]} ) {
       ))}
 
        <Link href="/log-out" className="absolute bottom-4 left-4 text-sm text-gray-400 hover:text-white">
-        Cerrar sesión
+        Log out
       </Link>
       <span onClick={closeNav} className="closebtn">X</span>
     </div>

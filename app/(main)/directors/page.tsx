@@ -30,13 +30,13 @@ export default async function DirectorPage({searchParams}: {searchParams: {id? :
                     <input type="hidden" name="url" value={id ? `${API_GATEWAY_URL}/directors/${id}` : `${API_GATEWAY_URL}/directors`} />
                     <ContentFormText question={"Name"} value={directorData?.name ?? ""}/>
                     <ContentFormDate question={"Birth"} value={directorData?.birth ?? ""}/>
-                    <input className={styles.button} type="submit" value={id ? 'Actualizar' : 'Enviar'}/>
-                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
+                    <input className={styles.button} type="submit" value={id ? 'Update' : 'Send'}/>
+                    {id && (<input className={styles.button} type={"submit"} value="Delete" formAction={async (formData: FormData) => {
                         'use server';
                         deleteForm(formData);
                         redirect('/directors')
                     }} />)}     
-                    {id && (<input className={styles.button} type="submit" value="Cancelar" formAction={async () => {
+                    {id && (<input className={styles.button} type="submit" value="Cancel" formAction={async () => {
                         'use server';
                         redirect('/directors');
                     }} />)}     

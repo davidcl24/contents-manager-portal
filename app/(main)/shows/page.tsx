@@ -57,13 +57,13 @@ export default async function ShowPage({searchParams}: {searchParams: {id? :stri
                         Is published
                         <input type="checkbox" name="is_published"/>
                     </label>
-                    <input className={styles.button} type="submit" value={id ? 'Actualizar' : 'Enviar'}/>
-                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
+                    <input className={styles.button} type="submit" value={id ? 'Update' : 'Send'}/>
+                    {id && (<input className={styles.button} type={"submit"} value="Delete" formAction={async (formData: FormData) => {
                         'use server';
                         deleteForm(formData);
                         redirect("/shows");
                     }} />)} 
-                    {id && (<input className={styles.button} type="submit" value="Cancelar" formAction={async () => {
+                    {id && (<input className={styles.button} type="submit" value="Delete" formAction={async () => {
                         'use server';
                         redirect('/shows');
                     }} />)}  

@@ -53,13 +53,13 @@ export default async function MoviePage({searchParams}: {searchParams: {id? :str
                         <input type="checkbox" name="is_published"/>
                     </label>
                     <input className={styles.fileInput} type="file" name="videoFile"/>
-                    <input className={styles.button} type="submit" value={id ? 'Actualizar' : 'Enviar'}/>
-                    {id && (<input className={styles.button} type={"submit"} value="Borrar" formAction={async (formData: FormData) => {
+                    <input className={styles.button} type="submit" value={id ? 'Update' : 'Send'}/>
+                    {id && (<input className={styles.button} type={"submit"} value="Delete" formAction={async (formData: FormData) => {
                         'use server';
                         deleteForm(formData);
                         redirect('/movies');
                     }} />)} 
-                    {id && (<input className={styles.button} type="submit" value="Cancelar" formAction={async () => {
+                    {id && (<input className={styles.button} type="submit" value="Cancel" formAction={async () => {
                         'use server';
                         redirect('/movies');
                     }} />)}  
